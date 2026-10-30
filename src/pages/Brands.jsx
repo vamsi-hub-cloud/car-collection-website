@@ -1,0 +1,11 @@
+import {Link} from 'react-router-dom'
+import {brandInfo,brands,cars,catInfo,categories} from '../data.js'
+import {GroupImage,CarImage,Heading,Page,PageHead,Reveal} from '../components/ui.jsx'
+
+export default function Brands(){
+  return <Page><PageHead title="Brands & categories" sub="Start with a marque you love or a type of drive you want."/>
+    <section className="wrap"><Heading>Brands</Heading><div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">{brands.map((b,i)=>{const list=cars.filter(c=>c.brand===b);return <Reveal key={b} delay={(i%3)*.08}><Link to={`/collection?brand=${encodeURIComponent(b)}`} className="group flex h-full items-center justify-between gap-4 overflow-hidden rounded-3xl border border-white/10 bg-panel p-6 transition hover:border-brass/60 hover:bg-panel2">
+      <div><h3 className="font-display text-2xl font-extrabold group-hover:text-brass">{b}</h3><p className="mt-1 text-sm text-dim">{brandInfo[b][0]} · est. {brandInfo[b][1]}</p><p className="mt-4 text-sm">{list.map(c=>c.name).join(' · ')}</p></div>
+      <GroupImage list={list} label="Photo soon" ph="grid h-24 w-36 shrink-0 place-items-center rounded-xl bg-panel2 text-xs text-dim" className="h-24 w-36 shrink-0 rounded-xl object-cover transition duration-500 group-hover:scale-110"/></Link></Reveal>})}</div></section>
+    <section className="wrap pt-24"><Heading>Categories</Heading><div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">{categories.map((c,i)=>{const list=cars.filter(x=>x.category===c);return <Reveal key={c} delay={(i%3)*.08}><Link to={`/collection?cat=${c}`} className="group block h-full rounded-3xl border border-white/10 bg-gradient-to-br from-panel2 to-panel p-6 transition hover:-translate-y-1 hover:border-brass/60"><h3 className="font-display text-2xl font-extrabold">{c}</h3><p className="mt-2 text-dim">{catInfo[c]}</p><div className="mt-5 flex -space-x-6">{list.slice(0,3).map(x=><CarImage key={x.id} car={x} chip="grid h-20 w-28 shrink-0 place-items-center rounded-xl border-2 border-panel bg-panel2 px-2 text-center text-xs font-semibold" className="h-20 w-28 shrink-0 rounded-xl border-2 border-panel object-cover"/>)}</div><p className="mt-4 text-sm text-brass">{list.length} cars</p></Link></Reveal>})}</div></section></Page>
+}

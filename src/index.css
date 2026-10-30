@@ -1,0 +1,19 @@
+@tailwind base;@tailwind components;@tailwind utilities;
+html{scroll-behavior:smooth}
+body{@apply bg-ink text-mist font-body antialiased overflow-x-hidden}
+::selection{background:#CBA45C;color:#0A1A16}
+@layer components{
+.wrap{@apply mx-auto w-full max-w-7xl px-5 sm:px-8}
+.btn{@apply inline-flex items-center justify-center gap-2 rounded-full px-6 py-3 text-sm font-semibold transition duration-300 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brass active:scale-95}
+.btn-brass{@apply bg-brass text-ink hover:bg-white hover:shadow-[0_0_30px_rgba(203,164,92,.45)]}
+.btn-ghost{@apply border border-white/20 text-mist hover:border-brass hover:text-brass}
+.input{@apply w-full rounded-xl border border-white/10 bg-panel px-4 py-3 text-sm text-mist placeholder:text-dim outline-none transition focus:border-brass focus:ring-1 focus:ring-brass}
+.title{@apply font-display text-4xl font-extrabold leading-[1.05] tracking-tight sm:text-5xl lg:text-6xl}
+}
+@keyframes marquee{to{transform:translateX(-50%)}}
+@keyframes road{to{background-position:-120px 0}}
+@keyframes beam{0%,100%{opacity:.35}50%{opacity:.8}}
+.marquee{animation:marquee 32s linear infinite}
+.road{background:repeating-linear-gradient(90deg,#CBA45C 0 60px,transparent 60px 120px);animation:road .5s linear infinite}
+.outline-text{-webkit-text-stroke:1.5px rgba(228,236,232,.18);color:transparent}
+@media (prefers-reduced-motion:reduce){*{animation-duration:.01ms!important;transition-duration:.01ms!important}html{scroll-behavior:auto}}
